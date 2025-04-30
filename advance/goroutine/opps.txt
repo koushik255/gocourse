@@ -1,0 +1,3 @@
+cameron := laurel (L), Gci (?), JHSS (W), Wci (L)
+preston := Grci (L), Southwood (?), Glenview (L), Forest (L)
+Gci := Kci (?), Cameron (?), Blueville (L), EDSS (?)
