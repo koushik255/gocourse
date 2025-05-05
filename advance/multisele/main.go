@@ -6,32 +6,32 @@ package main
 
 import (
 	"fmt"
-	// "time"
+	"time"
 )
 
-func main() {
+// func main() {
 
-	ch := make(chan int)
+// 	ch := make(chan int)
 
-	go func() {
-		ch <- 1
-		close(ch)
-	}()
+// 	go func() {
+// 		ch <- 1
+// 		close(ch)
+// 	}()
 
-	for {
-		select {
-		case msg, ok := <-ch:
-			if !ok {
-				fmt.Println("Channel closed!")
-				//clean up activies
-				return
-			}
-			fmt.Println("received:", msg)
-		}
-	}
-	// when a channel is closed the select received the value 0 of the type
+// 	for {
+// 		select {
+// 		case msg, ok := <-ch:
+// 			if !ok {
+// 				fmt.Println("Channel closed!")
+// 				//clean up activies
+// 				return
+// 			}
+// 			fmt.Println("received:", msg)
+// 		}
+// 	}
+// when a channel is closed the select received the value 0 of the type
 
-}
+// }
 
 // using time.after to implement timeouts
 // func main() {
@@ -51,38 +51,38 @@ func main() {
 // 	}
 // }
 
-// func main() {
-// 	ch1 := make(chan int)
-// 	ch2 := make(chan int)
+func main() {
+	ch1 := make(chan int)
+	ch2 := make(chan int)
 
-// 	go func() {
+	go func() {
 
-// 		time.Sleep(time.Second)
-// 		ch1 <- 1
+		ch1 <- 1
+		// time.Sleep(1 * time.Second)
 
-// 	}()
+	}()
 
-// 	go func() {
-// 		time.Sleep(time.Second)
-// 		ch2 <- 2
+	go func() {
+		ch2 <- 2
+		time.Sleep(2 * time.Second)
 
-// 	}()
+	}()
 
-// 	time.Sleep(2 * time.Second)
+	time.Sleep(3 * time.Second)
 
-// 	for range 2 { // looping over it assures we get all possibilitys
-// 		select {
-// 		case msg := <-ch1:
-// 			fmt.Println("received from ch1 :", msg)
+	for range 2 { // looping over it assures we get all possibilitys
+		select {
+		case msg := <-ch1:
+			fmt.Println("received from ch1 :", msg)
 
-// 		case msg := <-ch2:
-// 			fmt.Println("received from ch2:", msg)
-// 			// default:
+		case msg := <-ch2:
+			fmt.Println("received from ch2:", msg)
+			// default:
 
-// 			// 	fmt.Println("No channels ready..") // no waitnig for go routine to finsih
-// 			//so default just goes of
-// 		}
-// 	}
-// 	fmt.Println("End of program!")
+			// 	fmt.Println("No channels ready..") // no waitnig for go routine to finsih
+			//so default just goes of
+		}
+	}
+	fmt.Println("End of program!")
 
-// }
+}
