@@ -34,8 +34,9 @@ func main() {
 
 	numGoroutine := 10
 
-	wg.Add(numGoroutine)
+	// wg.Add(numGoroutine)
 	for range numGoroutine {
+		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			for range 1000 {
